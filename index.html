@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Osita 🐻❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { font-family: 'Dancing Script', cursive; color: #ffd700; margin-bottom: 15px; }
+        h1 { font-size: 3em; margin-top: 30px; }
+        h2 { font-size: 2.5em; color: #e60000; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 1px solid #e60000;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(230, 0, 0, 0.2);
+        }
+        .counter {
+            font-size: 1.2em;
+            color: #ffffff;
+            margin: 20px 0;
+        }
+        .counter span { color: #ffd700; font-weight: bold; }
+        .btn {
+            background-color: #e60000;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        .btn:hover { background-color: #ffd700; color: #0d0d0d; transform: scale(1.05); }
+        .hidden-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.3em;
+            color: #ffd700;
+            font-family: 'Dancing Script', cursive;
+            background-color: rgba(255, 215, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px dashed #ffd700;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .gallery img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 10px;
+            border: 2px solid #ffd700;
+        }
+        .placeholder-img {
+            width: 100%;
+            height: 200px;
+            background-color: #1a1a1a;
+            border: 2px dashed #e60000;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.9em;
+        }
+        footer { margin-top: 40px; font-size: 0.9em; color: #888; }
+        .heart { color: #e60000; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Para Mi Osita 🐻</h1>
+        <p style="font-size: 1.2em; color: #e60000;">¡Felices 5 meses, mi amor!</p>
+
+        <div class="card">
+            <h2>Nuestro Tiempo Juntas</h2>
+            <div class="counter">
+                Llevamos juntas: <br>
+                <span id="days">0</span> días, 
+                <span id="hours">0</span> horas, 
+                <span id="minutes">0</span> minutos
+            </div>
+            <p>Desde el 28 de Mayo de 2026 💕</p>
+        </div>
+
+        <div class="card">
+            <h2>Nuestra Historia</h2>
+            <p>Aquí puedes escribir cómo se conocieron, cómo fue su primera cita virtual, o ese momento en el que supiste que era ella. ¡Cuéntale lo que sientes!</p>
+        </div>
+
+        <div class="card">
+            <h2>Nuestros Secretos 🤫</h2>
+            <p>Escribe aquí ese chiste interno, esa palabra que solo ustedes entienden, o esa broma que las hace reír a las dos. Ella sabrá exactamente a qué te refieres.</p>
+        </div>
+
+        <div class="card">
+            <h2>Galería</h2>
+            <p>Sube fotos de ustedes, capturas de pantalla o stickers favoritos.</p>
+            <div class="gallery">
+                <div class="placeholder-img">Sube tu foto aquí 📸</div>
+                <div class="placeholder-img">Sube tu foto aquí 📸</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Una Carta Para Ti</h2>
+            <p style="text-align: left; font-style: italic;">
+                "Mi amor, aunque la distancia nos separe, cada día pienso en ti. Eres mi persona favorita, mi paz y mi alegría. Gracias por estos 5 meses tan hermosos. Te amo con todo mi corazón."
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>¿Tienes una sorpresa? 🎁</h2>
+            <p>Presiona el botón para ver un mensaje especial.</p>
+            <button class="btn" onclick="mostrarSorpresa()">¡Presióname!</button>
+            <div id="sorpresa" class="hidden-message">
+                ¡Eres la mujer más hermosa del mundo! <br> Te amo hoy, mañana y siempre. 💖
+            </div>
+        </div>
+
+        <footer>
+            Hecho con mucho amor por tu esposa <span class="heart">❤️</span>
+        </footer>
+    </div>
+
+    <script>
+        // Contador de tiempo
+        const startDate = new Date('2026-05-28T00:00:00').getTime();
+        
+        function actualizarContador() {
+            const now = new Date().getTime();
+            const distance = now - startDate;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+        }
+        
+        setInterval(actualizarContador, 1000);
+        actualizarContador();
+
+        // Sorpresa
+        function mostrarSorpresa() {
+            const elemento = document.getElementById('sorpresa');
+            if (elemento.style.display === 'block') {
+                elemento.style.display = 'none';
+            } else {
+                elemento.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
